@@ -1,0 +1,3188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leave.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../../../../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../../../../logo.png'/>
+  <script type='text/javascript' src='../../../../coverage.js'></script>
+  <script type='text/javascript' src='../../../../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>leavemanager\src\main\java\com\hexaware\MLP213\model\Leave.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package com.hexaware.MLP213.model;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td><pre class='imports prettyprint' onclick='showHideLines(this)'><div>import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+import com.hexaware.MLP213.persistence.DbConnection;
+import com.hexaware.MLP213.persistence.EmployeeDAO;
+import com.hexaware.MLP213.persistence.LeaveDAO;</div><span>import ...</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+ * Leave class to store employee leave details.
+ *
+ * @author hexaware
+ */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>20</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>public class Leave {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * leaveId to store leave id.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>24</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 23 Writes: 34'>leaveId</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * empId to store employee id.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>28</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 23 Writes: 34'>empId</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * noOfDays to store leave duration.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>32</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 21 Writes: 34'>noOfDays</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * startDate to store leave start date.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>36</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private Date <span class='instance covered' title='Reads: 18 Writes: 34'>startDate</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * endDate to store leave end date.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>40</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private Date <span class='instance covered' title='Reads: 18 Writes: 34'>endDate</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * leaveType to store leave type.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>44</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 30 Writes: 36'>leaveType</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * leaveStatus to store leave Status.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>48</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 25 Writes: 36'>leaveStatus</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * leaveReason to store leave reason.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>52</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 17 Writes: 34'>leaveReason</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * appliedOn to store leave application date.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>56</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private Date <span class='instance covered' title='Reads: 17 Writes: 34'>appliedOn</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * managerComment to store manager comment.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>60</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 17 Writes: 34'>managerComment</span>;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>62</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  @Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>63</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final boolean equals(final Object obj) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>64</td><td class='count'>11</td>
+      <td><pre class='prettyprint jmp'>    <span id='l64s0' title='Executions: 11' class='covered cp' onclick='showHide(this,0)'>if (obj == null)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 52, 53, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>65</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l65s0'>      return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 52</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 224</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>66</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>67</td><td class='count'>9</td>
+      <td><pre class='prettyprint jmp'>    <span id='l67s0' title='Executions: 9' class='covered cp' onclick='showHide(this,0)'>if (getClass() != obj.getClass())</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 53, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>68</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l68s0'>      return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 53</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>69</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>70</td><td class='count'>8</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l70s0'>    Leave lmp = (Leave) obj;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>71</td><td class='count'>8</td>
+      <td><pre class='prettyprint jmp'>    <span id='l71s0' title='Executions: 8' class='covered cp' onclick='showHide(this,0)'>if (Objects.equals(leaveId, lmp.leaveId)</span> && <span id='l71s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(empId, lmp.empId)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>72</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l72s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(noOfDays, lmp.noOfDays)</span> && <span id='l72s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(startDate, lmp.startDate)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>73</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l73s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(endDate, lmp.endDate)</span> && <span id='l73s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(leaveType, lmp.leaveType)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>74</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l74s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(leaveStatus, lmp.leaveStatus)</span> && <span id='l74s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(leaveReason, lmp.leaveReason)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>75</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l75s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(appliedOn, lmp.appliedOn)</span> && <span id='l75s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(managerComment, lmp.managerComment)) {</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>76</td><td class='count'>6</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l76s0'>      return true;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 686</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 184, 185</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 51, 57</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 223</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>77</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>78</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l78s0'>    return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 183, 186</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>79</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>81</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  @Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>82</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int hashCode() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>83</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l83s0'>    return Objects.hash(leaveId, empId, noOfDays, startDate, endDate, leaveType, leaveStatus, leaveReason,</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 54x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>84</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>               appliedOn, managerComment);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>85</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * Empty constructor.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>90</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l90s0'>  public Leave() {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 48, 51</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>92</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l92s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 48, 51</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * constructer for Leave class.
+   * @param argLeaveId to leave id.
+   * @param argEmpId to set employee id.
+   * @param argNoOfDays to noofdays.
+   * @param argStartDate to set start date.
+   * @param argEndDate to set end date.
+   * @param argLeaveType to set leave type.
+   * @param argLeavestatus for leave status.
+   * @param argLeaveReason to set leave reason.
+   * @param argAppliedOn to set leave reason.
+   * @param argManagercomment to mcom.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>106</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public Leave(</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>107</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final int argLeaveId,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>108</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final int argEmpId,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>109</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final int argNoOfDays,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>110</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final Date argStartDate,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>111</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final Date argEndDate,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>112</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final String argLeaveType,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>113</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final String argLeavestatus,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>114</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final String argLeaveReason,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>115</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                final Date argAppliedOn,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>116</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l116s0'>                final String argManagercomment)     {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>117</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l117s0'>    this.leaveId = argLeaveId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>118</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l118s0'>    this.empId = argEmpId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>119</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l119s0'>    this.noOfDays = argNoOfDays;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>120</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l120s0'>    this.startDate = argStartDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>121</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l121s0'>    this.endDate = argEndDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>122</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l122s0'>    this.leaveType = argLeaveType;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>123</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l123s0'>    this.leaveStatus = argLeavestatus;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>124</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l124s0'>    this.leaveReason = argLeaveReason;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>125</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l125s0'>    this.appliedOn = argAppliedOn;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>126</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l126s0'>    this.managerComment = argManagercomment;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>128</td><td class='count'>33</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l128s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 672</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 824</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 156x2, 183, 184, 185, 186</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 47, 54, 57</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the leaveId.
+   * @return this leaveId.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>133</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getLeaveId() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>134</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l134s0'>    return leaveId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 55, 56, 60, 61</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>135</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div> /**
+   *
+   * @param argLeaveId to set leaveId.
+   */</div><span> /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>140</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setLeaveId(final int argLeaveId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>141</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l141s0'>    this.leaveId = argLeaveId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 59</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>142</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l142s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 59</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the empId.
+   * @return this empId.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>147</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getEmpId() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>148</td><td class='count'>8</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l148s0'>    return empId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 64, 65</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 880, 884, 887</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindEmpId: 724, 725, 727</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>149</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div> /**
+   *
+   * @param argEmpId to set empId.
+   */</div><span> /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>154</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setEmpId(final int argEmpId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>155</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l155s0'>    this.empId = argEmpId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 63</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>156</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l156s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 63</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the noOfDays.
+   * @return this noOfDays.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>161</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getNoOfDays() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>162</td><td class='count'>6</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l162s0'>    return noOfDays;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 68, 69</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652, 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>163</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argNoOfDays to set noOfDays.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>168</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setNoOfDays(final int argNoOfDays) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>169</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l169s0'>    this.noOfDays = argNoOfDays;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 67</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>170</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l170s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 67</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the startDate.
+   * @return this startDate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>175</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final Date getStartDate() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>176</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l176s0'>    return startDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 72, 73</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>177</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argStartDate to set startDate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>182</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setStartDate(final Date argStartDate) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>183</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l183s0'>    this.startDate = argStartDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 71</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>184</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l184s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 71</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the endDate.
+   * @return this endDate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>189</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final Date getEndDate() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>190</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l190s0'>    return endDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 76, 77</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>191</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argEndDate to set endDate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>196</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setEndDate(final Date argEndDate) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>197</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l197s0'>    this.endDate = argEndDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 75</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>198</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l198s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 75</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the leaveType.
+   * @return this leaveType.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>203</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getLeaveType() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>204</td><td class='count'>15</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l204s0'>    return leaveType;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 80, 81, 82, 84, 85, 86, 88, 89, 90</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>205</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argLeaveType to set leaveType.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>210</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setLeaveType(final String argLeaveType) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>211</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l211s0'>    this.leaveType = argLeaveType;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 79, 83, 87</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>212</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l212s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 79, 83, 87</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the leaveStatus.
+   * @return this leaveStatus.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>217</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getLeaveStatus() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>218</td><td class='count'>10</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l218s0'>    return leaveStatus;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 836</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 93, 94, 95, 97, 98, 99, 101, 102, 103</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>219</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argLeaveStatus to set leaveStatus.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>224</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setLeaveStatus(final String argLeaveStatus) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>225</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l225s0'>    this.leaveStatus = argLeaveStatus;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 92, 96, 100</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>226</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l226s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 92, 96, 100</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the leaveReason.
+   * @return this leaveReason.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>231</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getLeaveReason() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>232</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l232s0'>    return leaveReason;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 106, 107</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>233</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argLeaveReason to set leaveReason.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>238</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setLeaveReason(final String argLeaveReason) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>239</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l239s0'>    this.leaveReason = argLeaveReason;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 105</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>240</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l240s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 105</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the appliedOn.
+   * @return this appliedOn.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>245</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final Date getAppliedOn() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>246</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l246s0'>    return appliedOn;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 110, 111</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>247</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argAppliedOn to set appliedOn.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>252</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setAppliedOn(final Date argAppliedOn) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>253</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l253s0'>    this.appliedOn = argAppliedOn;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 109</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>254</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l254s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 109</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the managerComment.
+   * @return this managerComment.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>259</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getManagerComment() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>260</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l260s0'>    return managerComment;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 114, 115</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>261</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argManagerComment to set managerComment.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>266</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setManagerComment(final String argManagerComment) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>267</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l267s0'>    this.managerComment = argManagerComment;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 113</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>268</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l268s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeave: 113</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The dao for Leave.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>272</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private static LeaveDAO ldao() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>273</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l273s0'>    DbConnection db = new DbConnection();</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>274</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l274s0'>    return db.getConnect().onDemand(LeaveDAO.class);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>275</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * list all leave details from leave table.
+   * @return all employee's leave details.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>280</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Leave[] listAll() {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>282</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l282s0'>    List&lt;Leave> leave = ldao().list();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 179</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllEmpty: 136</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>283</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l283s0'>    return leave.toArray(new Leave[leave.size()]);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllSome: 179</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListAllEmpty: 136</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>284</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * list employee leave  details by employee id.
+   * @param empID id to get employee leave details.
+   * @return Leave
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>291</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Leave[] listById(final int empID) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>292</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l292s0'>    final List&lt;Leave> leave = ldao().find(empID);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdSome: 308, 309</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdEmpty: 268</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>293</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l293s0'>    return leave.toArray(new Leave[leave.size()]);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdSome: 308, 309</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdEmpty: 268</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>294</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * list employee details by id in specific range.
+   * @param empID id to get employee leave details.
+   * @param r1 for starting range.
+   * @param r2 for  ending range.
+   * @return Leave
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>302</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Leave[] listByIdr(final int empID, final String r1, final String r2) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>303</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l303s0'>    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>304</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l304s0'>    sdf.setLenient(false);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>305</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l305s0'>    Date date1 = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>306</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l306s0'>    Date date2 = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>307</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>308</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l308s0'>      date1 = sdf.parse(r1);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>309</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l309s0'>      date2 = sdf.parse(r2);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>310</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l310s0'>    } catch (ParseException e) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>311</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l311s0'>      System.out.println("Please Enter Correct Date format");</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>312</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l312s0'>    }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>313</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l313s0'>    final List&lt;Leave> leave = ldao().rfind(empID, date1, date2);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>314</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l314s0'>    return leave.toArray(new Leave[leave.size()]);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrEmpty: 340</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByIdrSome: 382, 383</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>315</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * list employee leave details by leave id.
+   * @param leaveID id to get employee leave details.
+   * @return Leave
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>321</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Leave listBylId(final int leaveID) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>322</td><td class='count'>17</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l322s0'>    return ldao().find1(leaveID);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 685, 687, 689, 692</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 836</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListBylId: 221, 222, 226</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 879, 884</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>323</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * list employee leave details by id and status.
+   * @param eId for employee id.
+   * @param lstat for leave status.
+   * @return Leave
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>330</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Leave[] listByStatus(final int eId, final String lstat) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>331</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l331s0'>    final List&lt;Leave> leave = ldao().findPend(eId, lstat);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByStatusEmpty: 409</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByStatusSome: 449, 450</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>332</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l332s0'>    return leave.toArray(new Leave[leave.size()]);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByStatusEmpty: 409</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testListByStatusSome: 449, 450</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>333</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * @return  for Leave details.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>337</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String toString() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>338</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l338s0'>    return leaveId + "\t" + empId + "      \t" + noOfDays + "   \t" + startDate</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testToString: 247</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>339</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      + "  \t" + endDate + " \t" + leaveType + " \t" + leaveStatus + "\t" + leaveReason</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>340</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      + " \t" + appliedOn + "\t" + managerComment;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>341</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * NO of overlping Leaves.
+   * @param empId id to get employee details.
+   * @param sd id to get employee details.
+   * @param ed id to get employee details.
+   * @return count of no of employee.
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>349</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int countNo(final int empId, final Date sd, final Date ed) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>350</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l350s0'>    int count1 = dao().count1(empId, sd, ed);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>351</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l351s0'>    return count1;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>352</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The apply leave method to apply leave.
+   * @param empId emp id.
+   * @param sDate strat date.
+   * @param eDate end Date.
+   * @param lType leave type.
+   * @param lReason leave reason.
+   * @return leave.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>363</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static String applyLeave(final int empId, final String sDate, final String eDate, final String lType,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>364</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      final String lReason) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>365</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l365s0'>    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>366</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l366s0'>    sdf.setLenient(false);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>367</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l367s0'>    int days = 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>368</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l368s0'>    Date sd = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>369</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l369s0'>    Date ed = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>370</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l370s0'>    Date apDate = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>371</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l371s0'>    String lmstat = "APPROVED";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>372</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>373</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l373s0'>      sd = sdf.parse(sDate);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>374</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l374s0'>      ed = sdf.parse(eDate);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>375</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l375s0'>      Date cd = new Date();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>376</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l376s0'>      DateFormat df = DateFormat.getDateInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>377</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l377s0'>      Date curDate = df.parse(df.format(cd));</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>378</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l378s0'>      Calendar start = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>379</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l379s0'>      start.setTime(sd);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>380</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l380s0'>      Calendar end = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>381</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l381s0'>      end.setTime(ed);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>382</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l382s0'>      int count1 = 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>383</td><td class='count'>3</td>
+      <td><pre class='prettyprint jmp'>      <span id='l383s0' title='Executions: 3' class='covered cp' onclick='showHide(this,0)'>for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime())</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x3</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>384</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l384s0'>        Calendar c = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>385</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l385s0'>        c.setTime(date);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>386</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l386s0'>        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>387</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>        <span id='l387s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>if (dayOfWeek == 1</span> || <span id='l387s1' title='Executions: 1' class='covered cp' onclick='showHide(this,1)'>dayOfWeek == 7)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x2</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>388</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l388s0'>          count1++;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>389</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>390</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l390s0'>        count1 = count1 + 1;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>391</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>392</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l392s0'>      Leave[] sv = listById(empId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>393</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>      <span id='l393s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>for (Leave s</span> : <span id='l393s1' title='Executions: 1' class='covered cp' onclick='showHide(this,1)'>sv)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>394</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>        <span id='l394s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>if (sd.getTime() >= s.getStartDate().getTime()</span> && <span id='l394s1' title='Executions: 1' class='covered cp' onclick='showHide(this,1)'>sd.getTime() &lt;= s.getEndDate().getTime()</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>395</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>                 || <span id='l395s0' title='Executions: 0' class='uncovered'>ed.getTime() >= s.getStartDate().getTime()</span> && <span id='l395s1' title='Executions: 0' class='uncovered'>ed.getTime() &lt;= s.getEndDate().getTime()) {</span></pre>
+        <ol style='display:none'></ol>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>396</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l396s0'>          return "you already applied on this duration.";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApplyLeave: 512</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>397</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>398</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>399</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l399s0' title='Executions: 0' class='uncovered'>if (sd.getTime() >= curDate.getTime()</span> && <span id='l399s1' title='Executions: 0' class='uncovered'>ed.getTime() >= sd.getTime())</span> {</pre>
+        <ol style='display:none'></ol>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>400</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l400s0'>        long difmil = Math.abs(ed.getTime() - sd.getTime());</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>401</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l401s0'>        long diff = TimeUnit.DAYS.convert(difmil, TimeUnit.MILLISECONDS) + 1;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>402</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l402s0'>        int days1 = (int) diff;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>403</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l403s0'>        int noOfHolidays = Leave.totalDays(sd, ed);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>404</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l404s0'>        days = days1 - noOfHolidays;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>405</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l405s0'>        apDate = curDate;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>406</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l406s0'>      } else {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>407</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l407s0'>        return "enter valid Date";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>408</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>409</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l409s0'>    } catch (ParseException e) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>410</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l410s0'>      return "Please Enter Correct Date format";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>411</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l411s0'>    }</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>412</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l412s0'>    Employee e = Employee.listById(empId);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>413</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l413s0' title='Executions: 0' class='uncovered'>if (e.getManagerId() == 0)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>414</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l414s0' title='Executions: 0' class='uncovered'>if (lType.equalsIgnoreCase("EL"))</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>415</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>        <span id='l415s0' title='Executions: 0' class='uncovered'>if (e.getEarnedLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>416</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l416s0'>          int id1 = ldao().createLeave1(empId, days, sd, ed, lType, lmstat, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>417</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l417s0'>          dao().changeEBal(days, empId);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>418</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l418s0'>          return "leave applied" + "leave Id is" + id1;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>419</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>420</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l420s0'>          return "check EL balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>421</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>422</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>423</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l423s0' title='Executions: 0' class='uncovered'>}</span> else if (lType.equalsIgnoreCase("ML")) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>424</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l424s0' title='Executions: 0' class='uncovered'>if (e.getMaternityLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>425</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l425s0'>        int id1 = ldao().createLeave1(empId, days, sd, ed, lType, lmstat, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>426</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l426s0'>        dao().changeMBal(days, empId);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>427</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l427s0'>        return "leave applied" + "leave Id is" + id1;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>428</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>429</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l429s0'>        return "check ML balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>430</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>431</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l431s0' title='Executions: 0' class='uncovered'>}</span> else if (lType.equalsIgnoreCase("SL")) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>432</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l432s0' title='Executions: 0' class='uncovered'>if (e.getSickLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>433</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l433s0'>        int id1 = ldao().createLeave1(empId, days, sd, ed, lType, lmstat, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>434</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l434s0'>        dao().changeSlBal(days, empId);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>435</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l435s0'>        return "leave applied" + "leave Id is" + id1;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>436</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>437</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l437s0'>        return "check SL balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>438</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>439</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>440</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l440s0'>      return "check leave type";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>441</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>442</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l442s0' title='Executions: 0' class='uncovered'>if (lType.equalsIgnoreCase("EL"))</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>443</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l443s0' title='Executions: 0' class='uncovered'>if (e.getEarnedLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>444</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l444s0'>        int id = ldao().createLeave(empId, days, sd, ed, lType, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>445</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l445s0'>        return "leave applied" + "leave Id is" + id;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>446</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>447</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l447s0'>        return "check EL balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>448</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>449</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l449s0' title='Executions: 0' class='uncovered'>}</span> else if (lType.equalsIgnoreCase("ML")) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>450</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l450s0' title='Executions: 0' class='uncovered'>if (e.getMaternityLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>451</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l451s0'>        int id = ldao().createLeave(empId, days, sd, ed, lType, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>452</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l452s0'>        return "leave applied" + "leave Id is" + id;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>453</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>454</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l454s0'>        return "check ML balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>455</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>456</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>    <span id='l456s0' title='Executions: 0' class='uncovered'>}</span> else if (lType.equalsIgnoreCase("SL")) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>457</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l457s0' title='Executions: 0' class='uncovered'>if (e.getSickLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>458</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l458s0'>        int id = ldao().createLeave(empId, days, sd, ed, lType, lReason, apDate);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>459</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l459s0'>        return "leave applied" + "leave Id is" + id;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>460</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>461</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l461s0'>        return "check SL balance";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>462</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>463</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>464</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l464s0'>      return "check leave type";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>465</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>466</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>   /**
+   * The modify leave method to modify Leave.
+   * Employee can can modify only if leave status is pending.
+   * @param empId1 emp id.
+   * @param leaveId emp id.
+   * @param sDate1 strat date.
+   * @param eDate1 end Date.
+   * @param lType1 leave type.
+   * @param lReason1 leave reason.
+   * @return leave.\
+   */</div><span>   /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>478</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static String modifyLeave(final int empId1, final int leaveId, final String sDate1,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>479</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      final String eDate1, final String lType1, final String lReason1) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>4</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#aa5500' onclick='hidePath()'>Path coverage: 3/9</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l501s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l492s1 l501s0')">B: 0</span>
+        <span class='covered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l508s0 l509s0 l510s0')">C: 2</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l508s0 l512s0')">D: 0</span>
+        <span class='covered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l514s0 l515s0 l516s0 l517s0')">E: 1</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l514s0 l515s0 l519s0')">F: 0</span>
+        <span class='covered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l514s0 l521s0 l522s0 l523s0 l524s0')">G: 1</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l514s0 l521s0 l522s0 l526s0')">H: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l480s0 l492s0 l492s1 l493s0 l505s0 l506s0 l507s0 l514s0 l521s0 l529s0')">I: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>480</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l480s0'>    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>481</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l481s0'>    sdf.setLenient(false);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>482</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l482s0'>    int days = 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>483</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l483s0'>    Date sd = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>484</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l484s0'>    Date ed1 = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>485</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l485s0'>    Date apDate = null;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>486</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    try {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>487</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l487s0'>      sd = sdf.parse(sDate1);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>488</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l488s0'>      ed1 = sdf.parse(eDate1);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>489</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l489s0'>      Date cd = new Date();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>490</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l490s0'>      DateFormat df = DateFormat.getDateInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>491</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l491s0'>      Date curDate = df.parse(df.format(cd));</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>492</td><td class='count'>4</td>
+      <td><pre class='prettyprint jmp'>      <span id='l492s0' title='Executions: 4' class='covered cp' onclick='showHide(this,0)'>if (sd.getTime() >= curDate.getTime()</span> && <span id='l492s1' title='Executions: 4' class='covered cp' onclick='showHide(this,1)'>ed1.getTime() >= sd.getTime())</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>493</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l493s0'>        long difmil = Math.abs(ed1.getTime() - sd.getTime());</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>494</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l494s0'>        long diff = TimeUnit.DAYS.convert(difmil, TimeUnit.MILLISECONDS) + 1;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>495</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l495s0'>        int days1 = (int) diff;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>496</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l496s0'>        int  noOfHolidays = Leave.totalDays(sd, ed1);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>497</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l497s0'>        days = days1 - noOfHolidays;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>498</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l498s0'>        apDate = curDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>499</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l499s0'>        apDate = curDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>500</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l500s0'>      } else {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>501</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l501s0'>        return "enter valid Date";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>502</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>503</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l503s0'>    } catch (ParseException e) {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>504</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l504s0'>      return "Please Enter Correct Date format";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>505</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l505s0'>    }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>506</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l506s0'>    Employee e1 = Employee.listById(empId1);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>507</td><td class='count'>4</td>
+      <td><pre class='prettyprint jmp'>    <span id='l507s0' title='Executions: 4' class='covered cp' onclick='showHide(this,0)'>if (lType1.equalsIgnoreCase("EL"))</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>508</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>      <span id='l508s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>if (e1.getEarnedLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>509</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l509s0'>        ldao().changeLeave(days, sd, ed1, lType1, lReason1, apDate, leaveId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>510</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l510s0'>        return "leave modified";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>511</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>512</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l512s0'>        return "not modified";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>513</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>514</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>    <span id='l514s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>}</span> else if (lType1.equalsIgnoreCase("ML")) {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 590, 592</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>515</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>      <span id='l515s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>if (e1.getMaternityLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 590</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>516</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l516s0'>        ldao().changeLeave(days, sd, ed1, lType1, lReason1, apDate, leaveId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 590</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>517</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l517s0'>        return "leave modified";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 590</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>518</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>519</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l519s0'>        return "not modified";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>520</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>521</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>    <span id='l521s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>}</span> else if (lType1.equalsIgnoreCase("SL")) {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 592</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>522</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>      <span id='l522s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>if (e1.getSickLeaveBalance() >= days)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 592</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>523</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l523s0'>        ldao().changeLeave(days, sd, ed1, lType1, lReason1, apDate, leaveId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 592</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>524</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l524s0'>        return "leave modified";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 592</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>525</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>526</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l526s0'>        return "not modified";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>527</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>528</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }  else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>529</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l529s0'>      return "check leavetype";</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>530</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>531</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The approve deny method  for manager to apply or deny leaves applied by employee.
+   * @param empId emp id.
+   * @param leaveId emp id.
+   * @param lstat leave status.
+   * @param mcom manager comment.
+   * @return leave.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>540</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static String approveLeave(final int empId, final int leaveId,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>541</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final String lstat, final String mcom) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>4</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#33cc00' onclick='hidePath()'>Path coverage: 4/5</span>
+        <span class='covered' onclick="showPath(this,'l542s0 l545s0 l554s0')">A: 1</span>
+        <span class='uncovered' onclick="showPath(this,'l542s0 l545s0 l546s0 l548s0 l550s0 l556s0')">B: 0</span>
+        <span class='covered' onclick="showPath(this,'l542s0 l545s0 l546s0 l548s0 l550s0 l551s0 l556s0')">C: 1</span>
+        <span class='covered' onclick="showPath(this,'l542s0 l545s0 l546s0 l548s0 l549s0 l556s0')">D: 1</span>
+        <span class='covered' onclick="showPath(this,'l542s0 l545s0 l546s0 l547s0 l556s0')">E: 1</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>542</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l542s0'>    Leave l = Leave.listBylId(leaveId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652, 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>543</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l543s0'>    int days = l.getNoOfDays();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652, 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>544</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l544s0'>    ldao().approveLeave(lstat, mcom, leaveId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652, 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>545</td><td class='count'>4</td>
+      <td><pre class='prettyprint jmp'>    <span id='l545s0' title='Executions: 4' class='covered cp' onclick='showHide(this,0)'>if (lstat.equalsIgnoreCase("APPROVED"))</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652, 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>546</td><td class='count'>3</td>
+      <td><pre class='prettyprint jmp'>      <span id='l546s0' title='Executions: 3' class='covered cp' onclick='showHide(this,0)'>if (l.getLeaveType().equalsIgnoreCase("EL"))</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>547</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l547s0'>        dao().changeEBal(days, empId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>548</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>      <span id='l548s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>}</span> else if (l.getLeaveType().equalsIgnoreCase("ML")) {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 650, 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>549</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l549s0'>        dao().changeMBal(days, empId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 650</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>550</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>      <span id='l550s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>}</span> else if (l.getLeaveType().equalsIgnoreCase("SL")) {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>551</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l551s0'>        dao().changeSlBal(days, empId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>552</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>553</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>554</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l554s0'>      return "leave not approved";</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 654</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>555</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>556</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l556s0'>    return "leave is   " + lstat;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>557</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The validating leave Id method to check leave id present or not in Leave details.
+   * @param lId leave id.
+   * @return leave.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>563</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int validatelId(final int lId) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>2</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#00ff00' onclick='hidePath()'>Path coverage: 2/2</span>
+        <span class='covered' onclick="showPath(this,'l564s0 l565s0 l566s0')">A: 1</span>
+        <span class='covered' onclick="showPath(this,'l564s0 l565s0 l568s0')">B: 1</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>564</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l564s0'>    Leave l = Leave.listBylId(lId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 689, 692</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>565</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>    <span id='l565s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>if (l == null)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 689, 692</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>566</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l566s0'>      return 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 692</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>567</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>568</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l568s0'>      return 1;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidatelId: 689</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>569</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>570</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The validate manager for Leave to check the manager validation for their respective employees.
+   * @param lId leave id
+   * @param eId manager id.
+   * @return leave.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>577</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int validateManager(final int lId, final int eId) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>2</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#00ff00' onclick='hidePath()'>Path coverage: 2/2</span>
+        <span class='covered' onclick="showPath(this,'l578s0 l582s0 l583s0')">A: 1</span>
+        <span class='covered' onclick="showPath(this,'l578s0 l582s0 l585s0')">B: 1</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>578</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l578s0'>    Leave l = Leave.listBylId(lId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>579</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l579s0'>    int eid = l.getEmpId();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>580</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l580s0'>    Employee emp = Employee.listById(eid);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>581</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l581s0'>    int mid = emp.getManagerId();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>582</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>    <span id='l582s0' title='Executions: 2' class='covered cp' onclick='showHide(this,0)'>if (eId == mid)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>583</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l583s0'>      return 1;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 884</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>584</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>585</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l585s0'>      return 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>586</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>587</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The find employee method to get the Employee Id.
+   * @param lId leave id
+   * @return Employee id.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>593</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int findEmpId(final int lId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>594</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l594s0'>    Leave l = Leave.listBylId(lId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindEmpId: 727</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>595</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l595s0'>    int eid = l.getEmpId();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindEmpId: 727</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>596</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l596s0'>    return eid;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindEmpId: 727</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>597</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The find ELBal method to get EL bal.
+   * @param eId employee id
+   * @return EL Balance.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>603</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int findElBal(final int eId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>604</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l604s0'>    Employee l = Employee.listById(eId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindElBal: 753</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>605</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l605s0'>    int elbal = l.getEarnedLeaveBalance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindElBal: 753</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>606</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l606s0'>    return elbal;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindElBal: 753</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>607</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The find MLBal method to get ML bal.
+   * @param eId employee id
+   * @return ML Balance.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>613</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int findMlBal(final int eId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>614</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l614s0'>    Employee l = Employee.listById(eId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindMlBal: 779</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>615</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l615s0'>    int mlbal = l.getMaternityLeaveBalance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindMlBal: 779</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>616</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l616s0'>    return mlbal;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindMlBal: 779</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>617</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The find SLBal method to get SL bal.
+   * @param eId employee id
+   * @return Sl Balance.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>623</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int findSlBal(final int eId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>624</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l624s0'>    Employee l = Employee.listById(eId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindSlBal: 805</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>625</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l625s0'>    int slbal = l.getSickLeaveBalance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindSlBal: 805</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>626</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l626s0'>    return slbal;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindSlBal: 805</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>627</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * The find leave status method to get leave status.
+   * @param lId leave id
+   * @return leave status.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>633</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static String findLeaveStat(final int lId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>634</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l634s0'>    Leave l = Leave.listBylId(lId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 836</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>635</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l635s0'>    String stat = l.getLeaveStatus();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 836</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>636</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l636s0'>    return stat;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testLeaveStat: 836</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>637</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * The dao for employee.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>641</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private static EmployeeDAO dao() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>642</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l642s0'>    DbConnection db = new DbConnection();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>643</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l643s0'>    return db.getConnect().onDemand(EmployeeDAO.class);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testApproveLeave: 648, 650, 652</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>644</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>645</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private static int totalDays(final Date sd, final Date ed) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>4</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#ea1500' onclick='hidePath()'>Path coverage: 1/12</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l652s0 l653s0 l656s0 l657s0')">A: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l652s0 l653s0 l656s0 l656s1 l657s0')">B: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l652s0 l653s0 l656s0 l657s0')">C: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l652s0 l653s0 l656s0 l656s1 l657s0')">D: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l661s0 l669s0')">E: 0</span>
+        <span class='covered' onclick="showPath(this,'l646s0 l651s0 l651s1 l661s0 l662s0 l665s0 l666s0 l669s0')">F: 4</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l661s0 l662s0 l665s0 l665s1 l669s0')">G: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l661s0 l662s0 l665s0 l665s1 l666s0 l669s0')">H: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l652s0 l652s1 l671s0')">I: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l652s0 l653s0 l656s0 l656s1 l652s1 l671s0')">J: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l652s0 l652s1 l671s0')">K: 0</span>
+        <span class='uncovered' onclick="showPath(this,'l646s0 l651s0 l651s1 l652s0 l653s0 l656s0 l656s1 l652s1 l671s0')">L: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>646</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l646s0'>    Calendar start = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>647</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l647s0'>    start.setTime(sd);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>648</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l648s0'>    Calendar end = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>649</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l649s0'>    end.setTime(ed);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>650</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l650s0'>    int count = 0;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>651</td><td class='count'>4</td>
+      <td><pre class='prettyprint jmp'>    <span id='l651s0' title='Executions: 4' class='covered cp' onclick='showHide(this,0)'>if (end.get(Calendar.DAY_OF_WEEK) == 1</span> || <span id='l651s1' title='Executions: 4' class='covered cp' onclick='showHide(this,1)'>end.get(Calendar.DAY_OF_WEEK) == 7)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>652</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>      <span id='l652s0' title='Executions: 0' class='uncovered'>for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime())</span> {</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>653</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l653s0'>        Calendar c = Calendar.getInstance();</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>654</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l654s0'>        c.setTime(date);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>655</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l655s0'>        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>656</td><td class='count'>0</td>
+      <td><pre class='prettyprint jmp'>        <span id='l656s0' title='Executions: 0' class='uncovered'>if (dayOfWeek == 1</span> || <span id='l656s1' title='Executions: 0' class='uncovered'>dayOfWeek == 7)</span> {</pre>
+        <ol style='display:none'></ol>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>657</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l657s0'>          return count;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>658</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>659</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>660</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>661</td><td class='count'>22</td>
+      <td><pre class='prettyprint jmp'>      <span id='l661s0' title='Executions: 22' class='covered cp' onclick='showHide(this,0)'>for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime())</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588x3, 590x3, 592x3, 594x13</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>662</td><td class='count'>18</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l662s0'>        Calendar c = Calendar.getInstance();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588x2, 590x2, 592x2, 594x12</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>663</td><td class='count'>18</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l663s0'>        c.setTime(date);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588x2, 590x2, 592x2, 594x12</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>664</td><td class='count'>18</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l664s0'>        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588x2, 590x2, 592x2, 594x12</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>665</td><td class='count'>18</td>
+      <td><pre class='prettyprint jmp'>        <span id='l665s0' title='Executions: 18' class='covered cp' onclick='showHide(this,0)'>if (dayOfWeek == 1</span> || <span id='l665s1' title='Executions: 13' class='covered cp' onclick='showHide(this,1)'>dayOfWeek == 7)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588x2, 590x2, 592x2, 594x12</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594x10</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>666</td><td class='count'>6</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l666s0'>          count++;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594x3</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>667</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>668</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>669</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l669s0'>      return count;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>670</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>671</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l671s0'>    return count;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>672</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>673</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.hexaware.MLP213.model.LeaveTest
+-------------------------------------------------------------------------------
+Tests run: 21, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 4.131 s <<< FAILURE! - in com.hexaware.MLP213.model.LeaveTest
+testModifyLeave(com.hexaware.MLP213.model.LeaveTest)  Time elapsed: 0.098 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[not] modified> but was:<[leave] modified>
+	at com.hexaware.MLP213.model.LeaveTest.testModifyLeave(LeaveTest.java:595)
+
+testApplyLeave(com.hexaware.MLP213.model.LeaveTest)  Time elapsed: 0.061 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[leave appliedleave Id is0]> but was:<[you already applied on this duration.]>
+	at com.hexaware.MLP213.model.LeaveTest.testApplyLeave(LeaveTest.java:513)
+

@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../../../../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../../../../logo.png'/>
+  <script type='text/javascript' src='../../../../coverage.js'></script>
+  <script type='text/javascript' src='../../../../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>leavemanager\src\main\java\com\hexaware\MLP213\model\Employee.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package com.hexaware.MLP213.model;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td><pre class='imports prettyprint' onclick='showHideLines(this)'><div>import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import com.hexaware.MLP213.persistence.DbConnection;
+import com.hexaware.MLP213.persistence.EmployeeDAO;</div><span>import ...</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+ * Employee class to save employee personal details.
+ * @author hexaware
+ */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>11</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>public class Employee {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * empId to save employee id.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>15</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 24 Writes: 23'>empId</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * name to save employee name.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>19</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 18 Writes: 23'>name</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * gender to save gender of employee.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>23</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 19 Writes: 23'>gender</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * emailId to save email id.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>27</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 16 Writes: 23'>emailId</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * phoneNumber to save phone number.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>31</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 16 Writes: 23'>phoneNumber</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * joiningDate to save joining date.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>35</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private Date <span class='instance covered' title='Reads: 16 Writes: 23'>joiningDate</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * department to save department name.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>39</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private String <span class='instance covered' title='Reads: 16 Writes: 23'>department</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * earned leave Balance to save available earned leave Balanceance.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>43</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 19 Writes: 23'>earnedLeaveBalance</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * maternity leave Balance to save available maternity leave .
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>47</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private  int <span class='instance covered' title='Reads: 18 Writes: 23'>maternityLeaveBalance</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * sick leave Balance to save available sick leave Balanceance.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>51</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private  int <span class='instance covered' title='Reads: 18 Writes: 23'>sickLeaveBalance</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+   * managerId to save manager id.
+   */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>55</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private int <span class='instance covered' title='Reads: 20 Writes: 23'>managerId</span>;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>56</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  @Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>57</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final boolean equals(final Object obj) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>58</td><td class='count'>13</td>
+      <td><pre class='prettyprint jmp'>    <span id='l58s0' title='Executions: 13' class='covered cp' onclick='showHide(this,0)'>if (obj == null)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 163, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 51, 55</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>59</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l59s0'>      return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 163</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 55</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 202</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>60</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>61</td><td class='count'>10</td>
+      <td><pre class='prettyprint jmp'>    <span id='l61s0' title='Executions: 10' class='covered cp' onclick='showHide(this,0)'>if (getClass() != obj.getClass())</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 51, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>62</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l62s0'>      return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 51</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>63</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>64</td><td class='count'>9</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l64s0'>    Employee emp = (Employee) obj;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>65</td><td class='count'>9</td>
+      <td><pre class='prettyprint jmp'>    <span id='l65s0' title='Executions: 9' class='covered cp' onclick='showHide(this,0)'>if (Objects.equals(empId, emp.empId)</span> && <span id='l65s1' title='Executions: 7' class='covered cp' onclick='showHide(this,1)'>Objects.equals(name, emp.name)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>66</td><td class='count'>7</td>
+      <td><pre class='prettyprint jmp'>            && <span id='l66s0' title='Executions: 7' class='covered cp' onclick='showHide(this,0)'>Objects.equals(gender, emp.gender)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 49, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>67</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l67s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(emailId, emp.emailId)</span> && <span id='l67s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(phoneNumber, emp.phoneNumber)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>68</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l68s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(joiningDate, emp.joiningDate)</span> && <span id='l68s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(department, emp.department)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>69</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l69s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(earnedLeaveBalance, emp.earnedLeaveBalance)</span> && <span id='l69s1' title='Executions: 6' class='covered cp' onclick='showHide(this,1)'>Objects.equals(maternityLeaveBalance, emp.maternityLeaveBalance)</span> && <span id='l69s2' title='Executions: 0' class='uncovered'>Objects.equals(sickLeaveBalance, emp.sickLeaveBalance)</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>70</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        && <span id='l70s0' title='Executions: 6' class='covered cp' onclick='showHide(this,0)'>Objects.equals(managerId, emp.managerId)) {</span></pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>71</td><td class='count'>6</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l71s0'>      return true;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 166, 168</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 45, 47, 56</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 201</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>72</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>73</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l73s0'>    return false;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 164, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 49</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>74</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>75</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  @Override</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>76</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int hashCode() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>77</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l77s0'>    return Objects.hash(empId, name, gender, emailId, phoneNumber, joiningDate,</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 58x2, 59x2</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>78</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l78s0'>         department, earnedLeaveBalance, maternityLeaveBalance, sickLeaveBalance, managerId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 58, 59</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>79</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * empty constructor.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>84</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l84s0'>  public Employee() {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 43, 45</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>85</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l85s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 43, 45</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * @param argEmpId to initialize employee id.
+   * @param argName to name.
+   * @param argGender to gender.
+   * @param argEmailId to emailId.
+   * @param argPhoneNumber to phnno.
+   * @param argJoiningDate to doj.
+   * @param argDepartment to dept.
+   * @param argEarnedLeaveBalance to earned leave Balance.
+   * @param argMaternityLeaveBalance to maternity leave Balance.
+   * @param argSickLeaveBalance to sick leave Balance.
+   * @param argManagerId to manager id.
+    */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>100</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public Employee(final int argEmpId,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>101</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                       final String argName,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>102</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                       final String argGender,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>103</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                        final String argEmailId,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>104</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                         final int argPhoneNumber,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>105</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final Date argJoiningDate,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>106</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final String argDepartment,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>107</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final int argEarnedLeaveBalance,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>108</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final int argMaternityLeaveBalance,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>109</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>       final int argSickLeaveBalance,</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>110</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l110s0'>       final int argManagerId) {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>111</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l111s0'>    this.empId = argEmpId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>112</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l112s0'>    this.name = argName;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>113</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l113s0'>    this.gender = argGender;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>114</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l114s0'>    this.emailId = argEmailId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>115</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l115s0'>    this.phoneNumber = argPhoneNumber;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>116</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l116s0'>    this.joiningDate = argJoiningDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>117</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l117s0'>    this.department = argDepartment;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>118</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l118s0'>    this.earnedLeaveBalance = argEarnedLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>119</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l119s0'>    this.maternityLeaveBalance = argMaternityLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>120</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l120s0'>    this.sickLeaveBalance = argSickLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>121</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l121s0'>    this.managerId = argManagerId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>122</td><td class='count'>22</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l122s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 216</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 140x2, 164, 166, 168, 170</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testToString: 241</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 39, 41, 47</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div> /**
+   * Gets the EmployeeId.
+   *
+   * @return this Employee's ID.
+   */</div><span> /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>129</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getEmpId() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>130</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l130s0'>    return empId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 60, 61, 64, 65</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>131</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argEmpId to set employee id.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>137</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setEmpId(final int argEmpId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>138</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l138s0'>    this.empId = argEmpId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 63</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>139</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l139s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 63</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the name.
+   *
+   * @return this name.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>146</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getName() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>147</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l147s0'>    return name;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 68, 69</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>148</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argName to set name.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>154</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setName(final String argName) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>155</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l155s0'>    this.name = argName;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 67</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>156</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l156s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 67</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the gender.
+   * @return this gender.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>162</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getGender() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>163</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l163s0'>    return gender;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 72, 73, 74</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>164</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argGender to set gender.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>170</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setGender(final String argGender) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>171</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l171s0'>    this.gender = argGender;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 71</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>172</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l172s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 71</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>  /**
+    *
+    *@return emailId
+    */</div><span>  /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>177</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getEmailId() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>178</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l178s0'>    return emailId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 77, 78</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>179</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argEmailId to set emailId.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>185</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setEmailId(final String argEmailId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>186</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l186s0'>    this.emailId = argEmailId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 76</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>187</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l187s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 76</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the phoneNumber.
+   *
+   * @return this phoneNumber.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>194</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getPhoneNumber() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>195</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l195s0'>    return phoneNumber;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 81, 82</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>196</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argPhoneNumber to set phoneNumber.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>202</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setPhoneNumber(final int argPhoneNumber) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>203</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l203s0'>    this.phoneNumber = argPhoneNumber;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 80</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>204</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l204s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 80</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the joiningDate.
+   *
+   * @return this joiningDate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>211</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final Date getJoiningDate() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>212</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l212s0'>    return joiningDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 85, 86</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>213</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argJoiningDate to set joiningdate.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>219</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setJoiningDate(final Date argJoiningDate) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>220</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l220s0'>    this.joiningDate = argJoiningDate;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 84</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>221</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l221s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 84</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the department.
+   *
+   * @return this department.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>228</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String getDepartment() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>229</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l229s0'>    return department;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 89, 90</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>230</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argDepartment to set department.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>236</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setDepartment(final String argDepartment) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>237</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l237s0'>    this.department = argDepartment;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 88</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>238</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l238s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 88</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the Earned Leave Balanceance.
+   *
+   * @return this Eearned Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>245</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getEarnedLeaveBalance() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>246</td><td class='count'>5</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l246s0'>    return earnedLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 93, 94</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 594</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindElBal: 753</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>247</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argEarnedLeaveBalance to set Earned Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>253</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setEarnedLeaveBalance(final int argEarnedLeaveBalance) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>254</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l254s0'>    this.earnedLeaveBalance = argEarnedLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 92</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>255</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l255s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 92</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the Maternity Leave Balanceance.
+   *
+   * @return this Maternity Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>262</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getMaternityLeaveBalance() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>263</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l263s0'>    return maternityLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 97, 98</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 590</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindMlBal: 779</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>264</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argMaternityLeaveBalance to set Maternity Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>270</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setMaternityLeaveBalance(final int argMaternityLeaveBalance) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>271</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l271s0'>    this.maternityLeaveBalance = argMaternityLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 96</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>272</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l272s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 96</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the Sick Leave Balanceance.
+   *
+   * @return this Sick Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>279</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getSickLeaveBalance() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>280</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l280s0'>    return sickLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 101, 102</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 592</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testFindSlBal: 805</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>281</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argSickLeaveBalance to set Sick Leave Balanceance.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>287</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setSickLeaveBalance(final int argSickLeaveBalance) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>288</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l288s0'>    this.sickLeaveBalance = argSickLeaveBalance;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 100</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>289</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l289s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 100</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * Gets the managerId.
+   * @return this managerId.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>295</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final int getManagerId() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>296</td><td class='count'>6</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l296s0'>    return managerId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 105, 106</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 882, 883, 884, 887</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>297</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   *
+   * @param argManagerId to set managerId.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>303</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final void setManagerId(final int argManagerId) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>304</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l304s0'>    this.managerId = argManagerId;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 104</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>305</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l305s0'>  }</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testEmployee: 104</li>
+        </ol>
+      </td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * The dao for employee.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>310</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  private static EmployeeDAO dao() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>311</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l311s0'>    DbConnection db = new DbConnection();</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>312</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l312s0'>    return db.getConnect().onDemand(EmployeeDAO.class);</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>313</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * list all employee details.
+   * @return all employees' details
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>319</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Employee[] listAll() {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>321</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l321s0'>    List&lt;Employee> es = dao().list();</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 159</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllEmpty: 125</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>322</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l322s0'>    return es.toArray(new Employee[es.size()]);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllSome: 159</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListAllEmpty: 125</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>323</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * list employee details by id.
+   * @param empID id to get employee details.
+   * @return Employee
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>330</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static Employee listById(final int empID) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>331</td><td class='count'>14</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l331s0'>    return dao().find(empID);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 229</li>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testListById: 199, 200, 204</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testModifyLeave: 588, 590, 592, 594</li>
+          <li>com.hexaware.MLP213.model.LeaveTest#testValidateManager: 881, 884</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>332</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * The validate employee in the employee table.
+   * @param eId emp id.
+   * @return integer to check employee is there or not.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>339</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public static int validateEid(final int eId) {</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>1</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#7f8000' onclick='hidePath()'>Path coverage: 1/2</span>
+        <span class='uncovered' onclick="showPath(this,'l340s0 l341s0 l342s0')">A: 0</span>
+        <span class='covered' onclick="showPath(this,'l340s0 l341s0 l344s0')">B: 1</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>340</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l340s0'>    Employee emp = Employee.listById(eId);</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 229</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>341</td><td class='count'>1</td>
+      <td><pre class='prettyprint jmp'>    <span id='l341s0' title='Executions: 1' class='covered cp' onclick='showHide(this,0)'>if (emp == null)</span> {</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 229</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>342</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l342s0'>      return 0;</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>343</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>344</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered cp' onclick='showHide(this)' id='l344s0'>      return 1;</pre>
+        <ol style='display:none'>
+          <li>com.hexaware.MLP213.model.EmployeeTest#testLeaveStat: 229</li>
+        </ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>345</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>346</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+   * @return  for employee.
+   */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>351</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  public final String toString() {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>352</td><td class='count'>0</td>
+      <td><pre class='prettyprint uncovered' id='l352s0'>    return empId + "\t" + name + "      \t" + gender + "   \t" + emailId</pre>
+        <ol style='display:none'></ol>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>353</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      + "  \t" + phoneNumber + " \t" + joiningDate + " \t" + department + "\t"</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>354</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>      + earnedLeaveBalance + "\t" + maternityLeaveBalance + "\t" + sickLeaveBalance + "\t" + managerId;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>355</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>  }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>356</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>
